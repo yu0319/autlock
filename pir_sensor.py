@@ -5,27 +5,26 @@ from datetime import datetime
 
 import RPi.GPIO as GPIO
 
-# import pigpio
-
-# インターバル
 INTERVAL = 3
-# スリープタイム
 SLEEPTIME = 5
-# 使用するGPIO
 GPIO_PIN = 18
 
-# pi=pigpio.pi()
-# pi.set_mode(LED_PIN,pigpio.IN)
 
-# RPIモジュールをコメントアウト
-# pigpioモジュール用に書き換え中
-# ここから
-
-
-def zinkan():
-    try:
+class PirSensor:
+    def __init__(self, pin):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(GPIO_PIN, GPIO.IN)
+        self._pin = pin
+
+    def __del__(self):
+        GPIO.cleanup()
+
+    def detect(self) -> bool:
+        return GPIO.input(self._pin) == GPIO.HIGH
+
+
+def PirSensor():
+    try:
 
         print("処理キャンセル：CTRL+C")
         cnt = 1
