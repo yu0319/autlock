@@ -1,8 +1,9 @@
 #!/usr/bin/ python
 
-from datetime import datetime
 import time
-#import RPi.GPIO as GPIO
+from datetime import datetime
+
+# import RPi.GPIO as GPIO
 import pigpio
 
 # インターバル
@@ -12,33 +13,39 @@ SLEEPTIME = 20
 # 使用するGPIO
 LED_PIN = 18
 
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(GPIO_PIN, GPIO.IN)
-pi=pigpio.pi()
-pi.set_mode(LED_PIN,pigpio.IN)
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setup(GPIO_PIN, GPIO.IN)
+pi = pigpio.pi()
+pi.set_mode(LED_PIN, pigpio.IN)
 
-#RPIモジュールをコメントアウト
-#pigpioモジュール用に書き換え中
-#ここから
+# RPIモジュールをコメントアウト
+# pigpioモジュール用に書き換え中
+# ここから
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
-        print ("処理キャンセル：CTRL+C")
+        print("処理キャンセル：CTRL+C")
         cnt = 1
+
         while True:
             # センサー感知
-            #if(GPIO.input(GPIO_PIN) == GPIO.HIGH):
-            if(pi.write(GPIO_pin.pigpio.HIGH) == pigpio.HIGH):
-                print(datetime.now().strftime('%Y/%m/%d %H:%M:%S') +
-                "：" + str("{0:05d}".format(cnt)) + "回目の人感知")
-                cnt = cnt + 1
+            # if(GPIO.input(GPIO_PIN) == GPIO.HIGH):
+            if pi.write(GPIO_pin.pigpio.HIGH) == pigpio.HIGH:
+                print(
+                    datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+                    + "："
+                    + str("{0:05d}".format(cnt))
+                    + "回目の人感知"
+                )
+
+                cnt += 1
                 time.sleep(SLEEPTIME)
             else:
-                #print(GPIO.input(GPIO_PIN))
+                # print(GPIO.input(GPIO_PIN))
                 time.sleep(INTERVAL)
     except KeyboardInterrupt:
         print("終了処理中...")
     finally:
-        #GPIO.cleanup()
+        # GPIO.cleanup()
         pi.stop()
         print("pigpio clean完了")
