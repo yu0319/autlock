@@ -10,12 +10,12 @@ INTERVAL = 3
 # スリープタイム
 SLEEPTIME = 20
 # 使用するGPIO
-LED_PIN = 18
+GPIO_PIN = 18
 
 #GPIO.setmode(GPIO.BCM)
 #GPIO.setup(GPIO_PIN, GPIO.IN)
 pi=pigpio.pi()
-pi.set_mode(LED_PIN,pigpio.IN)
+pi.set_mode(GPIO_PIN,GPIO.IN)
 
 #RPIモジュールをコメントアウト
 #pigpioモジュール用に書き換え中
@@ -35,6 +35,7 @@ if __name__ == '__main__':
                 time.sleep(SLEEPTIME)
             else:
                 #print(GPIO.input(GPIO_PIN))
+                print(pi.write(GPIO_PIN))
                 time.sleep(INTERVAL)
     except KeyboardInterrupt:
         print("終了処理中...")
