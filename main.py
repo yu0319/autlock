@@ -54,7 +54,9 @@ def main():
 
     # ファイルからidmを読み込み
     # TODO: .txt -> .json
-    path = "/home/pi/Documents/autolock/member_ID.txt"
+    path = "/home/pi/Documents/new_autolock/member_ID.txt"
+
+    
     with open(path) as f:
         # NOTE: 行ごとに読み込む、改行を取り除く、リストにする
         idms = [l.strip() for l in f.readlines()]
@@ -62,6 +64,8 @@ def main():
     while True:
         # IDm取得
         idm = reader.read_idm()
+        idm = idm.upper()
+        print(idm)
 
         # IDmが未知
         if idm not in idms:

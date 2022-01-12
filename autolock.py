@@ -24,7 +24,7 @@ from servo import Servo
 
 
 class Autolock:
-    _INTERVAL = 3
+    _INTERVAL = 5
 
     def __init__(self, servo_pin) -> None:
         self._servo = Servo(servo_pin)
@@ -60,6 +60,5 @@ class Autolock:
             if self._is_locked.value:
                 continue
 
-            if time() - self._last_unlock.value > self.__INTERVAL:
+            if time() - self._last_unlock.value > self._INTERVAL:
                 self.lock()
-                self._is_locked.value = True
