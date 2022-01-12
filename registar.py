@@ -1,7 +1,9 @@
 import binascii
 import sys
+
 sys.path.insert(1,'home/pi/nfcpy')
 import nfc
+
 
 def connected(tag):tag;return False
 clf = nfc.ContactlessFrontend('usb')
